@@ -12,27 +12,27 @@ class TimeInput extends Component {
 
     componentDidMount() {
         if (!this.props.disabled && this.props.mountFocus) {
-            setTimeout(()=> {
+            setTimeout(() => {
                 this._input.focus();
             }, 0);
         }
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         if (this.props.mountFocus) {
-            setTimeout(()=> {
+            setTimeout(() => {
                 this._input.focus();
             }, 0);
         }
     }
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.initTime) {
             this.onChangeHandler(nextProps.initTime);
         }
     }
 
-    isValid (val) {
+    isValid(val) {
         var letterArr = val.split(':').join('').split(''),
             regexp = /^\d{0,2}?\:?\d{0,2}$/,
             valArr = [];
@@ -52,7 +52,7 @@ class TimeInput extends Component {
             return false
         }
 
-        if (minutes< 10 && Number(minutesStr[0]) > 5) {
+        if (minutes < 10 && Number(minutesStr[0]) > 5) {
             return false
         }
 
@@ -74,7 +74,7 @@ class TimeInput extends Component {
         return true;
     }
 
-    onChangeHandler (val) {
+    onChangeHandler(val) {
         if (val == this.state.time) {
             return;
         }
@@ -102,7 +102,8 @@ class TimeInput extends Component {
                 this.props.onTimeChange(val);
             }
 
-        }
+        } else
+            this.props.onTimeChange(val)
 
     }
 
@@ -113,19 +114,19 @@ class TimeInput extends Component {
         return 'tel'
     }
 
-    render () {
+    render() {
         return (
             <input
-              name={(this.props.name)? this.props.name : undefined}
-              className={this.props.className}
-              type={this.getType()}
-              disabled={this.props.disabled}
-              placeholder={this.props.placeholder}
-              value={this.state.time}
-              onChange={(e) => this.onChangeHandler(e.target.value)}
-              onFocus={(this.props.onFocusHandler)?(e) => this.props.onFocusHandler(e):undefined}
-              onBlur={(this.props.onBlurHandler)? (e) => this.props.onBlurHandler(e):undefined}
-              ref={(c) => this._input = c}
+                name={(this.props.name) ? this.props.name : undefined}
+                className={this.props.className}
+                type={this.getType()}
+                disabled={this.props.disabled}
+                placeholder={this.props.placeholder}
+                value={this.state.time}
+                onChange={(e) => this.onChangeHandler(e.target.value)}
+                onFocus={(this.props.onFocusHandler) ? (e) => this.props.onFocusHandler(e) : undefined}
+                onBlur={(this.props.onBlurHandler) ? (e) => this.props.onBlurHandler(e) : undefined}
+                ref={(c) => this._input = c}
             />
         );
     }
