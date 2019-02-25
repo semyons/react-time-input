@@ -139,11 +139,8 @@ var TimeInput = function (_Component) {
                 this.setState({
                     time: val
                 });
-
-                if (val.length === 5) {
-                    this.props.onTimeChange(val);
-                }
-            } else this.props.onTimeChange(val);
+                this.props.onTimeChange(val);
+            }
         }
     }, {
         key: 'getType',
